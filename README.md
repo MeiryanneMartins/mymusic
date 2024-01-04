@@ -1,1 +1,1 @@
-Project to consolidate knowledge the EletronJS framework
+Project for consolidate study about EletronJS framework.
