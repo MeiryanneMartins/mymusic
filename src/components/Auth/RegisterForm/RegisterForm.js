@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Icon } from 'semantic-ui-react';
+import "./RegisterForm.scss";
 
 export function RegisterForm(props) {
   const { openRegister, goBack } = props; 
@@ -13,7 +14,8 @@ export function RegisterForm(props) {
           <Form.Input
             type="text"
             placeholder="email"
-            icon="mail ouline"
+            icon="mail outline"
+            error={true}
           />
 
           <Form.Input
@@ -30,15 +32,22 @@ export function RegisterForm(props) {
 
           <Form.Input
             type="text"
-            placeholder="How you like to be called?"
+            placeholder="how you like to be called?"
             icon="user circle outline"  
           />
 
           <Form.Button type="submit" primary fluid>
-            Send
+            send
           </Form.Button>
 
         </Form>
+
+        <div className="register-form__options">
+          <p onClick={goBack}>back</p>
+          <p>
+            have account? <span onClick={openRegister}>go</span>
+          </p>
+        </div>
     </div>
   );
 }
