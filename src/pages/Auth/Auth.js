@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image } from "semantic-ui-react";
 import {AuthOptions, RegisterForm, LoginForm} from "../../components/Auth";
-import { logoNameWhite } from "../../assets";
+import { logoNameEyetech } from "../../assets";
 
 import "./Auth.scss";
 
@@ -28,7 +28,7 @@ export function Auth() {
     <div className="auth">
       <div className="auth__content">
         <Image
-          src={logoNameWhite}
+          src={logoNameEyetech}
           alt="mymusic"
           className="auth__content-logo"
         />  
