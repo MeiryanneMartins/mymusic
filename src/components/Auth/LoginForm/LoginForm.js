@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import { Form, Icon } from "semantic-ui-react";
 import { useFormik } from "formik";
+import { Auth } from "../../../api";
 import { initialValues, validationSchema } from './LoginForm.data';
 import "./LoginForm.scss";
+
+const auth = new Auth();
 
 export function LoginForm(props) {
   const { goBack } = props;
@@ -15,8 +18,12 @@ export function LoginForm(props) {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
-      console.log("Send...");
-      console.log(formValue);
+      try {
+        await auth.login(formValue.mail, formValue.password);
+      } catch (error) {
+        console.log(error);
+      }
+
     }
   });
 
