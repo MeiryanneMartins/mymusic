@@ -1,0 +1,37 @@
+@import "~/src/scss/index";
+
+.profile {
+  padding: 40px;
+
+  h1 {
+    color: #fff;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0;
+
+    > div {
+      display: flex;
+      align-items: center;
+
+      p {
+        color: #fff;
+      }
+      
+      > span {
+        margin-left: 20px;
+        font-size: 20px;
+        color: #fff;
+      }
+    }
+
+    .ui.button {
+      margin: 0;
+      border-radius: 100px;
+      background-color: #fff;
+    }
+  }
+}
