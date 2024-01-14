@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
 import { AvatarUpdate } from "../../components/Profile";
+import { BasicModal } from "../../components/Shared";
 import { User } from "../../api";
 import "./Profile.scss";
 
@@ -10,6 +11,7 @@ export function Profile() {
   const { displayName, email } = userController.getMe();
 
   return (
+    <>
     <div className="profile">
       <h1>Settings</h1>
 
@@ -38,5 +40,8 @@ export function Profile() {
         </Button>
       </div>
     </div>
+
+    <BasicModal show={true} onClose={() => console.log("close modal")} title="update data" children={<h1>content modal</h1>} /> 
+    </>
   );
 }
