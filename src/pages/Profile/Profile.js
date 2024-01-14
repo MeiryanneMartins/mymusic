@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "semantic-ui-react";
-import { AvatarUpdate, DisplayNameUpdateForm } from "../../components/Profile";
+import { AvatarUpdate, DisplayNameUpdateForm, EmailUpdateForm } from "../../components/Profile";
 import { BasicModal } from "../../components/Shared";
 import { User } from "../../api";
 import "./Profile.scss";
@@ -28,7 +28,7 @@ export function Profile() {
 
     if (type === "email") {
       setTitleModal("update email");
-      setContentModal(<h1>Form email</h1>);
+      setContentModal(<EmailUpdateForm onClose={onCloseModal} />);
     }
 
     if (type === "password") {
