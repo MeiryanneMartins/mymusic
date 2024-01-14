@@ -15,7 +15,12 @@ export function DisplayNameUpdateForm(props) {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
-      console.log(formValue);
+      try {
+        await userController.updateDisplayName(formValue.displayName);
+        onClose();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
