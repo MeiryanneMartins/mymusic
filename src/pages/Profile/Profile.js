@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "semantic-ui-react";
-import { AvatarUpdate } from "../../components/Profile";
+import { AvatarUpdate, DisplayNameUpdateForm } from "../../components/Profile";
 import { BasicModal } from "../../components/Shared";
 import { User } from "../../api";
 import "./Profile.scss";
@@ -23,7 +23,7 @@ export function Profile() {
   const openForm = (type) => {
     if (type === "displayName") {
       setTitleModal("update name and nickname");
-      setContentModal(<h1>Form DisplayName</h1>);
+      setContentModal(<DisplayNameUpdateForm onClose={onCloseModal} />);
     }
 
     if (type === "email") {
