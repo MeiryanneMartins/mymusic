@@ -1,1 +1,1 @@
-export * from "./LoggedLayout"
+export * from "./LoggedLayout";

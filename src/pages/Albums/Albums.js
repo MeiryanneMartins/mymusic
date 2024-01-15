@@ -5,5 +5,5 @@ export function Albums(){
     <div>
       <h1>Albums</h1>
     </div>
-  )
+  );
 }
