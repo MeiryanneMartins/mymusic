@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Form } from "semantic-ui-react";
 import { useFormik } from 'formik';
+import { User } from "../../../api";
 import { initialValues, validationSchema } from "./EmailUpdateForm.data";
 
-export function EmailUpdateForm() {
+const userController = new User();
+
+export function EmailUpdateForm(props) {
+  const { onClose } = props;
   const [showPassword, setShowPassword] = useState(false);
 
   const onShowHidenPassword = () => setShowPassword((prevState) => !prevState);
@@ -13,7 +17,15 @@ export function EmailUpdateForm() {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
-      console.log(formValue)
+      try {
+        await userController.updateUserEmail(
+          formValue.email,
+          formValue.password
+        );
+        onClose();
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 

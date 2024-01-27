@@ -1,6 +1,6 @@
 import React from 'react';
 import "./LoggedLayout.scss";
-import { LeftMenu, TopBar, Footer } from "../../components/Layout"
+import { LeftMenu, TopBar, Footer } from "../../components/Layout";
 
 export function LoggedLayout(props) {
   const { children } = props;
