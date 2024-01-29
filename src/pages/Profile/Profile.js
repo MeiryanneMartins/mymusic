@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Button } from "semantic-ui-react";
-import { AvatarUpdate, DisplayNameUpdateForm, EmailUpdateForm } from "../../components/Profile";
+import {
+  AvatarUpdate,
+  DisplayNameUpdateForm,
+  EmailUpdateForm,
+  PasswordUpdateForm
+} from "../../components/Profile";
 import { BasicModal } from "../../components/Shared";
 import { User } from "../../api";
 import "./Profile.scss";
@@ -33,7 +38,7 @@ export function Profile() {
 
     if (type === "password") {
       setTitleModal("update password");
-      setContentModal(<h1>Form Password</h1>);
+      setContentModal(<PasswordUpdateForm onClose ={onCloseModal}/>);
     }
 
     setShowModal(true);
@@ -63,7 +68,7 @@ export function Profile() {
 
         <div className="profile__block">
           <span>Password: *** *** *** </span>
-          <Button onClick={() => console.log("update password")}>
+          <Button onClick={() => openForm("password")}>
             update
           </Button>
         </div>
