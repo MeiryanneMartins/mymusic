@@ -1,13 +1,24 @@
 import React, { useState } from 'react';
 import { Form } from "semantic-ui-react";
+import { useFormik } from "formik";
+import { initialValues, validationSchema } from "./PasswordUpdateForm.data";
 
 export function PasswordUpdateForm(props) {
-  const { onClose } = props;
-  const [showPassword, setShowPassword] = useState(false);
 
+  //const { onClose } = props;
+  const [showPassword, setShowPassword] = useState(false);
   const onShowHidenPassword = () => setShowPassword((prevState) => !prevState);
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    validateOnChange: false,
+    onSubmit: async(formValue) => {
+      console.log(formValue);
+    },
+  });
+  
   return (
-    <Form>
+    <Form onSubmit={formik.handleSubmit}>
       <Form.Input
         name="password"
         type={showPassword ? "text" : "password"}
@@ -16,29 +27,41 @@ export function PasswordUpdateForm(props) {
           name: showPassword ? "eye slash" : "eye",
           link: true,
           onClick: onShowHidenPassword,
-        }} />
+        }}
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.errors.password}
+      />
 
       <Form.Input
-        name=" newPassword"
+        name="newPassword"
         type={showPassword ? "text" : "password"}
         placeholder="new password"
         icon={{
           name: showPassword ? "eye slash" : "eye",
           link: true,
           onClick: onShowHidenPassword,
-        }} />
+        }}
+        value={formik.values.newPassword}
+        onChange={formik.handleChange}
+        error={formik.errors.newPassword}
+      />
 
       <Form.Input
-        name=" repeatNewPassword"
+        name="repeatNewPassword"
         type={showPassword ? "text" : "password"}
         placeholder="Repeat new password"
         icon={{
           name: showPassword ? "eye slash" : "eye",
           link: true,
           onClick: onShowHidenPassword,
-        }} />
+        }}
+        value={formik.values.repeatNewPassword}
+        onChange={formik.handleChange}
+        error={formik.errors.repeatNewPassword}
+      />
 
-      <Form.Button type="submit" primary fluid>
+      <Form.Button type="submit" primary fluid loading ={formik.isSubmitting}>
         Update password
       </Form.Button>
 
