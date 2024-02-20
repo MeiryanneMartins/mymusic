@@ -4,6 +4,7 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential,
   updateEmail,
+  updatePassword
 } from "firebase/auth";
 
 export class User {
@@ -41,6 +42,20 @@ export class User {
       const credentials = EmailAuthProvider.credential(email, password);
       await reauthenticateWithCredential(auth.currentUser, credentials);
       await updateEmail(auth.currentUser, newEmail);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateUserPassword(password, newPassword){
+    try{
+      const auth = getAuth();
+      const email = auth.currentUser.email;
+
+      const credential = EmailAuthProvider.credential(email, password);
+
+      await reauthenticateWithCredential(auth.currentUser, credential);
+      await updatePassword(auth.currentUser, newPassword);
     } catch (error) {
       throw error;
     }

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Form } from "semantic-ui-react";
 import { useFormik } from "formik";
+import { User } from "../../../api";
 import { initialValues, validationSchema } from "./PasswordUpdateForm.data";
+
+const userController = new User();
 
 export function PasswordUpdateForm(props) {
 
-  //const { onClose } = props;
+  const { onClose } = props;
   const [showPassword, setShowPassword] = useState(false);
   const onShowHidenPassword = () => setShowPassword((prevState) => !prevState);
   const formik = useFormik({
@@ -13,7 +16,15 @@ export function PasswordUpdateForm(props) {
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async(formValue) => {
-      console.log(formValue);
+      try{
+        await userController.updateUserPassword(
+          formValue.password,
+          formValue.newPassword
+        );
+        onClose();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
   
