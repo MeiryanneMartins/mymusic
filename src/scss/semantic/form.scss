@@ -18,6 +18,43 @@
       }
     }
 
+    .dropdown {
+      background-color: $background-secondary !important;
+      border-color: $border-primary !important;
+
+      &:hover {
+        .menu{
+          border-color: $border-primary !important;
+        }
+      }
+
+      input {
+        background-color: $background-secondary !important;
+        border-color: $border-primary !important;
+        color: $font-light !important;
+
+        &:hover,
+        &:active,
+        &:focus{
+          background-color: $background-secondary !important;
+        }
+      }
+
+      .menu{
+       background-color: $background-secondary; 
+       border-color: $border-primary;
+
+       .item {
+        border-color: $border-primary;
+       }
+
+       .message {
+        color:$font-light;
+        opacity: 0.6;
+       }
+      }
+    }
+
     .ui.button.primary {
       background-color: $primary-color;
       color: $font-light;
