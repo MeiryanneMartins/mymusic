@@ -1,29 +1,31 @@
-import React, { useState,useCallback } from "react";
-import { Form, Image} from "semantic-ui-react";
-import { useDropzone } from 'react-dropzone';  
-import { noImage } from "../../../assets";
+import React from "react";
+import { Form } from "semantic-ui-react";
+import { useFormik } from "formik";  
+import { initialValues, validationSchema } from "./NewArtistForm.data.js";
 import "./NewArtistForm.scss";
 
-export function NewArtistForm(props) {
+export function NewArtistForm() {
   //const { onClose } = props;
 
-  const [image] = useState(noImage);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const onDrop = useCallback(async (acceptedFile) => {
-    console.log(acceptedFile)
-  });
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop });
+  const formik = useFormik({
+    initialValues: initialValues(),
+    validationSchema: validationSchema(),
+    validateOnChange: false,
+    onSubmit: async (formValue) => {
+      console.log(formValue);
+    },
+  });  
 
   return (
-    <Form className="new-artist-form">
-      <div {...getRootProps()} className="new-artist-form__banner">
-        <input {...getInputProps()} />
-        <Image src={image} />
-      </div>
-      <Form.Input name="name" placeholder="Name Artist" />
-
+    <Form className="new-artist-form" onSubmit={formik.handleSubmit}>
+      <Form.Input
+       name="name"
+       placeholder="Name Artist" 
+       value={formik.values.name}
+       onChange={formik.handleChange}
+       error={formik.errors.name}
+      />
       <Form.Button type="submit" primary fluid>
         create artist
       </Form.Button>
