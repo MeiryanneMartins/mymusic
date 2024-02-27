@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Menu } from "semantic-ui-react";
 import { Link, useLocation } from "react-router-dom";
 import { BasicModal } from "../../Shared";
-import {NewArtistForm} from "../../Artist";
+import { NewArtistForm } from "../../Artist";
 import "./LeftMenu.scss";
 
 
@@ -15,7 +15,7 @@ export function LeftMenu() {
 
   const isCurrentpage = (route) => {
     return route === pathname
-  }
+  };
 
   const closeModal = () => {
     setShowModal(false);
@@ -24,14 +24,15 @@ export function LeftMenu() {
   };
 
   const openModal = (type) => {
+
     if (type === "artist") {
       setTitleModal("New artist");
-      setContentModal(<NewArtistForm onClose={closeModal} />)
+      setContentModal(<NewArtistForm onClose={closeModal} />);
     }
 
     if (type === "album") {
       setTitleModal("New album");
-      setContentModal(<p>Form new album</p>)
+      setContentModal(<p>Form new album</p>)  
     }
 
     if (type === "song") {
@@ -98,7 +99,7 @@ export function LeftMenu() {
       show={showModal}
       onClose={closeModal}
       title={titleModal}
-      childen={contentModal}
+      children={contentModal}
     />
     </>
   );
