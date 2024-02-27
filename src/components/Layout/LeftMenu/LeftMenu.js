@@ -3,6 +3,7 @@ import { Menu } from "semantic-ui-react";
 import { Link, useLocation } from "react-router-dom";
 import { BasicModal } from "../../Shared";
 import { NewArtistForm } from "../../Artist";
+import { NewAlbumForm } from "../../Album";
 import "./LeftMenu.scss";
 
 
@@ -32,7 +33,7 @@ export function LeftMenu() {
 
     if (type === "album") {
       setTitleModal("New album");
-      setContentModal(<p>Form new album</p>)  
+      setContentModal(<NewAlbumForm onClose={closeModal} />);  
     }
 
     if (type === "song") {
