@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "semantic-ui-react";
 import { useFormik } from 'formik';
+import { map } from "lodash";
+import { Artist } from "../../../api";
 import { initialValues, validationSchema } from "./NewAlbumForm.data";
 import "./NewAlbumForm.scss";
 
-export function NewAlbumForm() {
+const artistController = new Artist();
 
+export function NewAlbumForm() {
+  const [artistOptions, setArtistOptions] = useState([]);
+
+  useEffect(()=>{
+    (async () =>{
+      try {
+        const response = await artistController.obtainAll(); 
+        const newData = map(response, (artist) => ({
+          key: artist.id,
+          value: artist.id,
+          text: artist.name,
+        }));
+
+      setArtistOptions(newData);       
+      } catch (error) {
+        console.log(error)
+      }
+    })();
+  }, []);
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
@@ -30,8 +51,10 @@ export function NewAlbumForm() {
             fluid
             search
             selection
-            options={[]}
-            error={true}
+            options={artistOptions}
+            value={formik.values.artist}
+            onChange={(_, data) => formik.setFieldValue("artist", data.value)}
+            error={formik.errors.artist}
           />
         </div>
       </div>
