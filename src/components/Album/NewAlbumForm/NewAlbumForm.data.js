@@ -10,6 +10,6 @@ export function initialValues() {
 export function validationSchema() {
   return Yup.object({
     name: Yup.string().required(true),
-    artist: Yup.string.required(true),
+    artist: Yup.string().required(true),
   });
 }
