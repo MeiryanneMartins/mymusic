@@ -1,12 +1,14 @@
 import React from "react";
 import { Form } from "semantic-ui-react";
-import { useFormik } from "formik";  
-import { Artist } from "../../../api";
+import { useFormik } from "formik";
+import { Storage, Artist } from "../../../api";
+import { v4 as uuidv4 } from "uuid";  
 import { initialValues, validationSchema } from "./NewArtistForm.data.js";
 import "./NewArtistForm.scss";
 
 const artistController = new Artist();
-
+const storageController = new Storage();
+ 
 export function NewArtistForm() {
 
   const formik = useFormik({
@@ -15,9 +17,16 @@ export function NewArtistForm() {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        const { name } = formValue;
-
-        await artistController.create(name);
+        const { file, name } = formValue;
+        const response = await storageController.uploadFile(
+          file,
+          "artist",
+          uuidv4()
+        )
+        const url = await storageController.getUrlFile(
+          response.metadata.fullPath
+        );
+        await artistController.create(url, name);
         onclose();
       } catch (error) {
         console.error(error)
