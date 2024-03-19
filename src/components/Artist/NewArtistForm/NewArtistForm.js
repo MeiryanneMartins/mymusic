@@ -17,15 +17,17 @@ export function NewArtistForm() {
     validateOnChange: false,
     onSubmit: async (formValue) => {
       try {
-        const { file, name } = formValue;
+        const {file, name}  = formValue;
         const response = await storageController.uploadFile(
           file,
-          "artist",
+          "artists",
           uuidv4()
         )
+        console.log(response)
         const url = await storageController.getUrlFile(
           response.metadata.fullPath
         );
+        console.log(url)
         await artistController.create(url, name);
         onclose();
       } catch (error) {

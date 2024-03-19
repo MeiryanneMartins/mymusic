@@ -6,11 +6,11 @@ import { db } from "../utils";
 export class Artist {
   collectionName = "artists";
 
-  async create(name) {
+  async create(image,name) {
     try {
       const idArtist = uuidv4();
       const created_at = new Date();
-      const data = { id: idArtist, name, created_at };
+      const data = { id: idArtist,image, name, created_at };
 
       const docRef = doc(db, this.collectionName, idArtist);
       await setDoc(docRef, data);
