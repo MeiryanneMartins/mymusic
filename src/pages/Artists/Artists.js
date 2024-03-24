@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { Artist } from "../../api";
-import { ListArtists } from "../../components/Artist";
-import "./Artists.scss";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Artist as ArtistController } from "../../api";
 
-const artistController = new Artist();
+const artistController = new ArtistController();
 
 export function Artists() {
-  const [artists, setArtists] = useState([]);
+  const { id } = useParams();
+  const [artist, setArtist] = useState(null);
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await artistController.obtainAll();
-        setArtists(response);
+        const response = await artistController.getArtist(id);
+        setArtist(response);
       } catch (error) {
         console.error(error);
       }
     })();
-  }, []);
+  }, [id]);
 
   return (
-    <div className="artistis-page">
-      <h1>Artists</h1>
-      <ListArtists  artists={artists}/>
+    <div>
+      <h1>Artist</h1>
     </div>
   );
 }
