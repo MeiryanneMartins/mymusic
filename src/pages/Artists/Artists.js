@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Artist as ArtistController } from "../../api";
+import "./Artists.scss";
 
 const artistController = new ArtistController();
 
@@ -20,8 +21,12 @@ export function Artists() {
   }, [id]);
 
   return (
-    <div>
-      <h1>Artist</h1>
+    <div className="artist-page">
+      <p>BANNER</p>
+      <div className="artist-page_slide">
+        <h2>Songs</h2>
+        
+      </div>
     </div>
   );
 }
