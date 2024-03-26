@@ -1,5 +1,15 @@
 @import "~/src/scss/index";
 
 .artist-banner{
-  
+  position: relative;
+  margin-top: -40px;
+
+  >h1 {
+    font-size: 90px;
+    margin:0;
+  }
+
+  > span {
+    text-transform: uppercase;
+  }
 }
