@@ -21,7 +21,7 @@ export function Artists() {
     })();
   }, [id]);
 
-  //if (!artist) return null;
+  if (!artist) return null;
 
   return (
     <div className="artists-page">
