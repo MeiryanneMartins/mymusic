@@ -10,7 +10,7 @@ export function LoggedNavigation() {
     <LoggedLayout>
     <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/artist' element={<Artists />} />
+        <Route path='/artists' element={<Artists />} />
         <Route path='/artist/:id' element={<Artist />} />
         <Route path='/albums' element={<Albums />} />
         <Route path='/album/:id' element={<Album />} />
