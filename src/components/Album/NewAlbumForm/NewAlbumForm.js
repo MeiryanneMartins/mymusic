@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Form } from "semantic-ui-react";
 import { useFormik } from 'formik';
 import { map } from "lodash";
-import { Artist } from "../../../api";
+import { v4 as uuidv4} from "uuid";
+import { Artist, Album } from "../../../api";
 import { initialValues, validationSchema } from "./NewAlbumForm.data";
 import "./NewAlbumForm.scss";
 
 const artistController = new Artist();
+const albumController = new Album();
 
 export function NewAlbumForm() {
   const [artistOptions, setArtistOptions] = useState([]);
@@ -27,12 +29,19 @@ export function NewAlbumForm() {
       }
     })();
   }, []);
+
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     validateOnChange: false,
-    onSubmit: async () => {
-
+    onSubmit: async (formValue) => {
+      try {
+        const { name, artist } = formValue;
+        await albumController.create(name, artist);
+        onclose();
+      } catch (error) {
+        console.error(error);
+      }
     }
   })
   return (
