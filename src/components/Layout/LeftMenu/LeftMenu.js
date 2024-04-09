@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { BasicModal } from "../../Shared";
 import { NewArtistForm } from "../../Artist";
 import { NewAlbumForm } from "../../Album";
+import { NewSongForm } from '../../Song/NewSongForm';
 import "./LeftMenu.scss";
 
 
@@ -38,7 +39,7 @@ export function LeftMenu() {
 
     if (type === "song") {
       setTitleModal("New song");
-      setContentModal(<p>Form new song</p>)
+      setContentModal(<NewSongForm onClose={closeModal}/>)
     }
 
     setShowModal(true);
