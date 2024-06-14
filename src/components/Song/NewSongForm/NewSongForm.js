@@ -1,12 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Icon } from "semantic-ui-react";
 import classNames from "classnames";
 import { useFormik } from "formik";
+import { map } from "lodash";
+import { Album } from "../../../api/album";
 import { initialValues, validationSchema } from './NewSongForm.data';
 import "./NewSongForm.scss";
 
+const albumController = new Album();
+console.log(albumController)
+
 export function NewSongForm() {
   const [songName] = useState("");
+  const [albumsOptions, setAlbumsOptions] = useState([]);
+
+  useEffect(() => {
+    (async() => {
+      try {
+        const response = await albumController.obtainAll();
+        const result = map(response, (item) => ({
+          key: item.id,
+          value: item.id,
+          text: item.name,
+        }));
+        setAlbumsOptions(result);
+      } catch (error) {
+        console.error(error);
+        
+      }
+    })();
+  }, []);
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -32,7 +55,10 @@ export function NewSongForm() {
         fluid
         search
         selection
-        options={[]}
+        options={albumsOptions}
+        value={formik.values.album}
+        onChange={(_, data) => formik.setFieldValue("album", data.value)}
+        error ={formik.errors.album}
       />
 
       <div className={classNames("add-song-form_file", {
